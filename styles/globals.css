@@ -29,3 +29,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.last\:mr-0:last-child {
+  margin-right: 0px;
+}

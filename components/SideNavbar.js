@@ -22,7 +22,7 @@ export default function SideNavbar() {
   );
 
   const warapperClas = classNames(
-    "h-screen px-4 pt-8 pb-4 bg-white flex justify-between flex-col border-1 border border-dashed w-80",
+    "h-screen px-4 pt-8 pb-4 bg-white flex justify-between flex-col border-1  w-80",
     {
       ["w-80"]: !toggleCollapse,
       ["w-20"]: toggleCollapse,

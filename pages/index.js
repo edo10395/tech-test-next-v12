@@ -1,27 +1,27 @@
-import { unstable_getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
-import Layout from "../components/Layout";
-import { authOptions } from "./api/auth/[...nextauth]";
+import { unstable_getServerSession } from 'next-auth';
+import Layout from '../components/Layout';
+import { authOptions } from './api/auth/[...nextauth]';
 
 export default function Home() {
   return (
-    <div>
-      <Layout>Selamat datang !</Layout>;
-    </div>
+    <>
+      <Layout>Selamat datang !</Layout>
+      ;
+    </>
   );
 }
-//mengatur redirect user login ketika session kosong
+// mengatur redirect user login ketika session kosong
 export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(
     context.req,
     context.res,
-    authOptions
+    authOptions,
   );
 
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: '/login',
         permanent: false,
       },
     };

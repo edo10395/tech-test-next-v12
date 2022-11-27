@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import ILogin from "../public/assets/ILogin.png";
-import Image from "next/image";
-import logo from "../public/assets/logo.png";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import logo from '../public/assets/logo.png';
+import ILogin from '../public/assets/ILogin.png';
 
-const LoginFormComponent = () => {
+function LoginFormComponent() {
   const router = useRouter();
 
   const [form, setForm] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
   const [pageState, setPageState] = useState({
-    error: "",
+    error: '',
     processing: false,
   });
 
@@ -22,27 +22,27 @@ const LoginFormComponent = () => {
     setForm((old) => ({ ...old, [e.target.name]: e.target.value }));
   };
 
-  //handle pesan error
+  // handle pesan error
   const errorMessage = (error) => {
     const errorMap = {
-      CredentialsSignin: "Username atau Password salah",
+      CredentialsSignin: 'Username atau Password salah',
     };
-    return errorMap[error] ?? "Unknown error occure";
+    return errorMap[error] ?? 'Unknown error occure';
   };
 
-  //handle form submit
+  // handle form submit
   const handleSubmit = (event) => {
-    setPageState((old) => ({ ...old, processing: true, error: "" }));
+    setPageState((old) => ({ ...old, processing: true, error: '' }));
 
     event.preventDefault();
-    signIn("credentials", {
+    signIn('credentials', {
       ...form,
       redirect: false,
     })
       .then((res) => {
         if (res.ok) {
           // Authenticate User
-          router.push("/");
+          router.push('/');
           setPageState((old) => ({ ...old, processing: true }));
         } else {
           setPageState((old) => ({
@@ -59,7 +59,7 @@ const LoginFormComponent = () => {
         setPageState((old) => ({
           ...old,
           processing: false,
-          error: err.message ?? "Something went wrong!",
+          error: err.message ?? 'Something went wrong!',
         }));
       });
   };
@@ -70,7 +70,7 @@ const LoginFormComponent = () => {
       <div className="lg:w-1/2 xl:max-w-screen-sm ">
         <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
           <div className="cursor-pointer flex items-center">
-            <Image src={logo} alt="logo"  />
+            <Image src={logo} alt="logo" />
           </div>
         </div>
 
@@ -86,13 +86,16 @@ const LoginFormComponent = () => {
             <form onSubmit={handleSubmit}>
               <div>
                 {/* alert */}
-                {pageState.error !== "" && (
+                {pageState.error !== '' && (
                   <div
                     className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-2"
                     role="alert"
                   >
                     <p className="font-bold">Maaf !</p>
-                    <p>{errorMessage(pageState.error)}.</p>
+                    <p>
+                      {errorMessage(pageState.error)}
+                      .
+                    </p>
                   </div>
                 )}
                 {/* tutup alert */}
@@ -146,7 +149,8 @@ const LoginFormComponent = () => {
             {/* ================TUTUP FORM================  */}
 
             <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-              Don't have an account ?{" "}
+              Don't have an account ?
+              {' '}
               <a className="cursor-pointer text-indigo-600 hover:text-indigo-800">
                 Sign up
               </a>
@@ -162,5 +166,5 @@ const LoginFormComponent = () => {
       </div>
     </div>
   );
-};
+}
 export default LoginFormComponent;

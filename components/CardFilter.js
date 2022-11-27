@@ -1,8 +1,9 @@
 import React from 'react';
 import Dropdown from './Dropdown';
 import SearchInput from './SearchInput';
+import Tables from './Tables';
 
-export default function CardContent({ currentTab }) {
+export default function CardFilter({ currentTab }) {
   const dataKategori = [
     { id: 1, ididKategori: 'mobile', label: 'Mobile' },
     { id: 2, ididKategori: 'bpjstk', label: 'Bpjstk' },
@@ -23,10 +24,12 @@ export default function CardContent({ currentTab }) {
     { id: 1, idStatus: 'tidak', label: 'Tidak Aktif' },
   ];
   return (
-    <div className="bg-white flex flex-col rounded-md p-4">
+    <div className="bg-white flex flex-col rounded-md p-4 gap-5">
+
       <div className="mb-5">
         <p className="text-xl">{currentTab.label}</p>
       </div>
+
       <div className="flex flex-row flex-wrap items-center gap-5">
         <div className="rounded-md flex flex-row flex-wrap justify-between items-center gap-3">
           <p>Kategori</p>
@@ -55,6 +58,8 @@ export default function CardContent({ currentTab }) {
           </div>
         </div>
       </div>
+
+      <Tables />
     </div>
   );
 }

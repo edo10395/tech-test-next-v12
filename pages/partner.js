@@ -1,31 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import CardHeader from '../components/CardHeader';
+import React from 'react';
 import Layout from '../components/Layout';
-import Paggination from '../components/Paggination';
+import { requiredAuth } from '../utils/requiredAuth';
 
-export default function partner() {
-  const tabs = [
-    {
-      id: 1, idTab: 'allProduct', label: 'Semua Produk',
-    },
-    {
-      id: 2, idTab: 'updateProduct', label: 'Update Produk',
-    },
-  ];
-  const [currentTab, setCurrentTab] = useState(tabs[0]);
-
-  const handleTab = (item) => {
-    setCurrentTab(item);
-  };
-
+export default function partner({ dataProps }) {
+  // console.log(dataProps);
+  const data = dataProps?.[0];
+  console.log(data.query.length);
+  if (data.success && data.query.length > 0) {
+    console.log('berisi');
+  } else {
+    console.log('tidak');
+  }
   return (
     <Layout>
-      <CardHeader tabs={tabs} handleTab={handleTab} currentTab={currentTab} />
-      {/* <Paggination /> */}
+      <p>sdsd</p>
     </Layout>
   );
 }
 
-// partner.getInitialProps = async () =>{
-//    const response = await fetch ('http')
-// }
+export async function getServerSideProps(context) {
+  const readDataDb = await fetch(`${process.env.NEXT_SERVER_API_URL}/read`, { method: 'GET' })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      return data;
+    }).catch((err) => {
+      console.log(err);
+      setIsExists(false);
+    });
+
+  // return requiredAuth(context, (session) => ({
+  //   props: { dataProps: [session, readDataDb] },
+  // }));
+  return requiredAuth(context, (session) => ({
+    props: { dataProps: [readDataDb] },
+  }));
+}

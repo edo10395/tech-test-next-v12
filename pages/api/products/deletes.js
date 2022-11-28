@@ -11,12 +11,7 @@ export default async function handler(req, res) {
 
   try {
     // req query
-    const { id } = await req.query;
-    const deleteProduct = await db.dataProduk.delete({
-      where: {
-        id: parseInt(id),
-      },
-    });
+    const deleteProduct = await db.dataProduk.deleteMany({});
 
     // karena ada perubahan kode 201
     return res.status(201).json({

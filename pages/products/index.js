@@ -1,21 +1,14 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
-import Layout from '../../components/Layout';
-import { requiredAuth } from '../../utils/requiredAuth';
-import CardHeader from '../../components/CardHeader';
+import React, { useState } from 'react';
 import CardFilter from '../../components/CardFilter';
+import CardHeader from '../../components/CardHeader';
+import Layout from '../../components/Layout';
 import Tables from '../../components/Tables';
-import Pagination from '../../components/Pagination';
 import {
-  arrTab, arrKategori, arrOperator, arrStatus,
+  arrKategori, arrOperator, arrStatus, arrTab,
 } from '../../utils/DefaultArr';
-import Drops from '../../components/Drops';
 
 export default function index({ products }) {
-  const router = useRouter();
-  // const { page, limit } = router.query;
-
   const [currentTab, setCurrentTab] = useState(arrTab[0]);
   const [arrFilter, setArrFilter] = useState([]);
   const [listActiveDrop, setListActiveDrop] = useState([]);
@@ -32,15 +25,10 @@ export default function index({ products }) {
     setArrFilter({ ...arrFilter, [type]: kode });
     setListActiveDrop({ ...listActiveDrop, [type]: label });
   };
-  // console.log('selectValue', arrFilter);
-  // console.log('activemenu', listActiveDrop);
 
-  const handleClick = () => {
-    // router.push(`products/${user.id}`)
-  };
   return (
     <div>
-      <Layout>
+      <Layout title="Product">
         <CardHeader arrTab={arrTab} handleTab={handleTab} currentTab={currentTab} />
         <CardFilter
           arrKategori={arrKategori}
@@ -52,8 +40,9 @@ export default function index({ products }) {
           arrFilter={arrFilter}
           listActiveDrop={listActiveDrop}
         />
-        {/*
         <Tables products={products} />
+        {/*
+
         <Pagination /> */}
       </Layout>
 
@@ -62,52 +51,58 @@ export default function index({ products }) {
 }
 
 // membuat static html (saat build time)
-export const getStaticProps = async (context) =>
-// const listKategori = [
-//   // 'mobile',
-//   'bpjstk',
-//   // 'ewallet',
-//   // 'bpjsks',
-//   // 'ewallet',
-//   // 'telkom-postpaid',
-//   // 'zakat',
-//   // 'infaq',
-//   // 'wakaf',
-//   // 'qurban',
-//   // 'multifinance',
-// ];
+export const getStaticProps = async (context) => {
+  const deleteAll = await fetch(`${process.env.NEXT_SERVER_API_URL}/deletes`, { method: 'POST' })
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((err) => {
+      console.log(err);
+    });
+  const listKategori = [
+    'mobile',
+    'bpjstk',
+    'ewallet',
+    'bpjsks',
+    'ewallet',
+    'telkom-postpaid',
+    'zakat',
+    'infaq',
+    'wakaf',
+    'qurban',
+    'multifinance',
+  ];
 
-// // get data eksernal
-// const arr = await Promise.all(
-//   listKategori.map((url) => fetch(`${process.env.NEXT_API_URL}/${url}`)
-//     .then((res) => res.json())
-//     .then((resdata) => resdata.data)),
-// );
-// const extProducts = arr.flat();
+  // get data eksernal
+  const arr = await Promise.all(
+    listKategori.map((url) => fetch(`${process.env.NEXT_API_URL}/${url}`)
+      .then((res) => res.json())
+      .then((resdata) => resdata.data)),
+  );
+  const extProducts = arr.flat();
 
-// // save respon eksternal ke db lokal
-// await axios
-//   .post(`${process.env.NEXT_SERVER_API_URL}/create`, extProducts)
-//   .then((res) => {
-//     const data = JSON.stringify(res.data);
+  // save respon eksternal ke db lokal
+  await axios
+    .post(`${process.env.NEXT_SERVER_API_URL}/create`, extProducts)
+    .then((res) => {
+      const data = JSON.stringify(res.data);
 
-//     return data;
-//   }).catch((err) => {
-//     console.log(err);
-//   });
-// // console.log(saveDb);
+      return data;
+    }).catch((err) => {
+      console.log(err);
+    });
 
-// // mengambil data dari db
-// const intProducts = await fetch(`${process.env.NEXT_SERVER_API_URL}/read`, { method: 'GET' })
-//   .then((response) => response.json())
-//   .then((data) => data)
-//   .catch((err) => {
-//     console.log(err);
-//   });
+  // mengambil data dari db
+  const intProducts = await fetch(`${process.env.NEXT_SERVER_API_URL}/read`)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((err) => {
+      console.log(err);
+    });
 
-  ({
+  return {
     props: {
-      // products: intProducts.query,
-      products: [],
+      products: intProducts.query,
+      // products: [],
     },
-  });
+  };
+};

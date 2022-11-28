@@ -13,8 +13,8 @@ export default async function handler(req, res) {
     // return res.status(201).json(req.query);
     const queryParam = req.query;
     const result = await db.dataProduk.findMany({
-      // skip: 1, // How many rows to skip
-      // take: 2, // Page size,
+      skip: 1, // How many rows to skip
+      take: 11, // Page size,
       where: {
         productType: {
           contains: queryParam.productType,

@@ -24,7 +24,7 @@ export default function CardFilter({
         <div className="rounded-md flex flex-row flex-wrap justify-between items-center gap-3">
           <p>Kategori</p>
           <div>
-            {/* <Drops /> */}
+            {/* <Drops data={arrKategori} onSelectChange={onSelectChange} /> */}
 
             <Dropdown
               data={arrKategori}
@@ -67,5 +67,6 @@ export default function CardFilter({
         </div>
       </div>
     </div>
+
   );
 }

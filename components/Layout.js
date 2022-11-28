@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import Navbar from './Navbar';
+import Header from './Header';
 import SideNavbar from './SideNavbar';
 
 export default function Layout(props) {
@@ -10,8 +10,9 @@ export default function Layout(props) {
         <title>{props.title}</title>
       </Head>
       <SideNavbar />
+
       <div className=" flex-1 p-4">
-        <Navbar />
+        <Header />
         {props.children}
       </div>
     </div>

@@ -4,9 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import logo from '../public/assets/logo.png';
-import {
-  CollapsIcon, HomeIcon, ArticleIcon,
-} from './icons';
+import { CollapsIcon, HomeIcon, ArticleIcon } from './icons';
 
 export default function SideNavbar() {
   const [toggleCollapse, setToggleCollapse] = useState(false);
@@ -28,7 +26,7 @@ export default function SideNavbar() {
   );
 
   const warapperClas = classNames(
-    'h-screen px-4 pt-8 pb-4 bg-white flex justify-between flex-col border-1',
+    'h-full px-4 pt-8 pb-4 bg-white flex justify-between flex-col border-1',
     {
       'w-1/6': !toggleCollapse,
       'w-20': toggleCollapse,

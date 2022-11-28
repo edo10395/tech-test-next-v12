@@ -1,6 +1,9 @@
 import React from 'react';
+import Drops from './Drops';
 
-export default function Dropdown({ data, buttonName, idButton }) {
+export default function Dropdown({
+  data, buttonName, idButton, onSelectChange,
+}) {
   return (
     <>
       <button
@@ -20,12 +23,12 @@ export default function Dropdown({ data, buttonName, idButton }) {
           {
         data.map((item) => (
           <li key={item.id}>
-            <a
-              href="#"
+            <p
               className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              onClick={() => onSelectChange(item)}
             >
               {item.label}
-            </a>
+            </p>
           </li>
         ))
       }

@@ -1,19 +1,19 @@
+import Head from 'next/head';
 import React from 'react';
-import Header from './Header';
-import Sidebar from './SideNavbar';
+import Navbar from './Navbar';
+import SideNavbar from './SideNavbar';
 
-function Layout({ children }) {
+export default function Layout(props) {
   return (
     <div className="h-screen flex flex-row justify-start">
-      {/* LEFT  */}
-      <Sidebar />
-      {/* RIGHT */}
+      <Head>
+        <title>{props.title}</title>
+      </Head>
+      <SideNavbar />
       <div className=" flex-1 p-4">
-        <Header />
-        <div>{children}</div>
+        <Navbar />
+        {props.children}
       </div>
     </div>
   );
 }
-
-export default Layout;

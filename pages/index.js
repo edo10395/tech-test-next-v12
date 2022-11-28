@@ -6,8 +6,10 @@ import { authOptions } from './api/auth/[...nextauth]';
 
 export default function Home() {
   return (
-    <Layout>
-      <p>Selamat datang !</p>
+    <Layout title="Home">
+      <div className="bg-white rounded-md p-10">
+        <p>Selamat datang !</p>
+      </div>
     </Layout>
   );
 }

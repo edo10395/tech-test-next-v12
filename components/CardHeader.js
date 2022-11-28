@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import company from '../public/assets/company.png';
 
-export default function CardHeader({ tabs, handleTab, currentTab }) {
+export default function CardHeader({ arrTab, handleTab, currentTab }) {
   const getTabsClasses = (idTab) => classNames(
     'inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-xl font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300',
     {
@@ -24,7 +24,7 @@ export default function CardHeader({ tabs, handleTab, currentTab }) {
           className="flex flex-wrap -mb-px"
         >
           {
-            tabs.map((item) => {
+            arrTab.map((item) => {
               const classes = getTabsClasses(item.idTab);
               return (
                 <li key={item.id} className="mr-2" role="presentation">

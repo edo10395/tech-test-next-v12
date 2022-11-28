@@ -8,13 +8,13 @@ export default async function handler(req, res) {
       message: 'Method Not Allowed',
     });
   }
-  // return res.status(201).json(req.body);
   // return res.status(201).json({
-  //   status: 'yyyyy',
+  //   status: true,
   //   data: req.body,
   // });
   try {
     const datas = req.body;
+
     datas.forEach(async (item, index) => {
       await db.dataProduk.create({
         data: datas[index],

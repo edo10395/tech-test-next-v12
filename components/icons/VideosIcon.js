@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-function VideosIcon({ fill = "#6C7281", ...rest }) {
+function VideosIcon({ fill = '#6C7281', ...rest }) {
   return (
     <svg
       width={24}

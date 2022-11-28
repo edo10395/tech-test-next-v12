@@ -1,6 +1,16 @@
-export { default as ArticleIcon } from "./ArticleIcon";
-export { default as HomeIcon } from "./HomeIcon";
-export { default as UsersIcon } from "./UsersIcon";
-export { default as VideosIcon } from "./VideosIcon";
-export { default as CollapsIcon } from "./CollapsIcon";
-export { default as LogoutIcon } from "./LogoutIcon";
+import ArticleIcon from './ArticleIcon';
+import HomeIcon from './HomeIcon';
+import UsersIcon from './UsersIcon';
+import VideosIcon from './VideosIcon';
+import CollapsIcon from './CollapsIcon';
+import LogoutIcon from './LogoutIcon';
+
+export
+{
+  ArticleIcon,
+  HomeIcon,
+  UsersIcon,
+  VideosIcon,
+  CollapsIcon,
+  LogoutIcon,
+};

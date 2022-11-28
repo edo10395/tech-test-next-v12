@@ -12,13 +12,15 @@ datasource db {
 
 model DataProduk {
   //kolom               tipe data   option
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   partnerName String
   productId   String
   operator    String
   productType String
   productName String
   basePrice   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model User {

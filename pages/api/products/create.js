@@ -1,17 +1,14 @@
-import { db } from '../../../prisma/db';
+import { db } from "../../../prisma/db";
 
 export default async function handler(req, res) {
   // cek req method
-  if (req.method !== 'POST') {
+  if (req.method !== "POST") {
     return res.status(401).json({
       success: false,
-      message: 'Method Not Allowed',
+      message: "Method Not Allowed",
     });
   }
-  // return res.status(201).json({
-  //   status: true,
-  //   data: req.body,
-  // });
+
   try {
     const datas = req.body;
 
@@ -21,9 +18,12 @@ export default async function handler(req, res) {
       });
     });
 
+    // await db.dataProduk.create({
+    //   data: req.body,
+    // });
     return res.status(201).json({
       success: true,
-      message: 'Berhasil ditambah',
+      message: "Berhasil ditambah",
     });
   } catch (error) {
     return res.status(401).json({

@@ -31,6 +31,9 @@ export default async function handler(req, res) {
         ...(Object.keys(queryParam).length > 0 ? filter : {}),
       },
     });
+    // const str = "%bpjsks";
+    // const result =
+    //   await db.$queryRaw`SELECT * FROM DataProduk WHERE productType LIKE ${str};`;
     return res.status(200).json({
       success: true,
       query: result,

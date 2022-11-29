@@ -1,8 +1,8 @@
-import React from 'react';
-import Dropdown from './Dropdown';
-import Drops from './Drops';
-import SearchInput from './SearchInput';
-import Tables from './Tables';
+import React from "react";
+import Dropdown from "./Dropdown";
+import Drops from "./Drops";
+import SearchInput from "./SearchInput";
+import Tables from "./Tables";
 
 export default function CardFilter({
   arrKategori,
@@ -24,13 +24,14 @@ export default function CardFilter({
         <div className="rounded-md flex flex-row flex-wrap justify-between items-center gap-3">
           <p>Kategori</p>
           <div>
-            {/* <Drops data={arrKategori} onSelectChange={onSelectChange} /> */}
-
-            <Dropdown
-              data={arrKategori}
+            <Drops
+              items={arrKategori}
+              buttonName={
+                listActiveDrop && listActiveDrop.productType
+                  ? listActiveDrop.productType
+                  : "Semua Kategori"
+              }
               onSelectChange={onSelectChange}
-              buttonName={(listActiveDrop && listActiveDrop.kategori) ? listActiveDrop.kategori : 'Semua Kategori'}
-              idButton="kategori"
             />
           </div>
         </div>
@@ -38,11 +39,14 @@ export default function CardFilter({
         <div className="rounded-md flex flex-row flex-wrap justify-between items-center gap-3">
           <p>Operator</p>
           <div>
-            <Dropdown
-              data={arrOperator}
+            <Drops
+              items={arrOperator}
+              buttonName={
+                listActiveDrop && listActiveDrop.operator
+                  ? listActiveDrop.operator
+                  : "Semua Operator"
+              }
               onSelectChange={onSelectChange}
-              buttonName={(listActiveDrop && listActiveDrop.operator) ? listActiveDrop.operator : 'Semua Operator'}
-              idButton="operator"
             />
           </div>
         </div>
@@ -50,12 +54,14 @@ export default function CardFilter({
         <div className="rounded-md flex flex-row flex-wrap justify-between items-center gap-3">
           <p>Status</p>
           <div>
-            <Dropdown
-              data={arrStatus}
+            <Drops
+              items={arrStatus}
+              buttonName={
+                listActiveDrop && listActiveDrop.status
+                  ? listActiveDrop.status
+                  : "Tidak Aktif"
+              }
               onSelectChange={onSelectChange}
-              idButton="status"
-              buttonName={(listActiveDrop && listActiveDrop.status) ? listActiveDrop.status : 'Tidak Aktif'}
-
             />
           </div>
         </div>
@@ -67,6 +73,5 @@ export default function CardFilter({
         </div>
       </div>
     </div>
-
   );
 }

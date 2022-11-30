@@ -1,48 +1,49 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import logo from '../public/assets/logo.png';
-import ILogin from '../public/assets/ILogin.png';
+import React, { useState } from "react";
+import Image from "next/image";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import logo from "../public/assets/logo.png";
+import ILogin from "../public/assets/ILogin.png";
 
 function LoginFormComponent() {
   const router = useRouter();
 
   const [form, setForm] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const [pageState, setPageState] = useState({
-    error: '',
+    error: "",
     processing: false,
   });
 
   const handleChange = (e) => {
     setForm((old) => ({ ...old, [e.target.name]: e.target.value }));
   };
+  console.log(form);
 
   // handle pesan error
   const errorMessage = (error) => {
     const errorMap = {
-      CredentialsSignin: 'Username atau Password salah',
+      CredentialsSignin: "Username atau Password salah",
     };
-    return errorMap[error] ?? 'Unknown error occure';
+    return errorMap[error] ?? "Unknown error occure";
   };
 
   // handle form submit
   const handleSubmit = (event) => {
-    setPageState((old) => ({ ...old, processing: true, error: '' }));
+    setPageState((old) => ({ ...old, processing: true, error: "" }));
 
     event.preventDefault();
-    signIn('credentials', {
+    signIn("credentials", {
       ...form,
       redirect: false,
     })
       .then((res) => {
         if (res.ok) {
           // Authenticate User
-          router.push('/');
+          router.push("/");
           setPageState((old) => ({ ...old, processing: true }));
         } else {
           setPageState((old) => ({
@@ -59,11 +60,10 @@ function LoginFormComponent() {
         setPageState((old) => ({
           ...old,
           processing: false,
-          error: err.message ?? 'Something went wrong!',
+          error: err.message ?? "Something went wrong!",
         }));
       });
   };
-
   return (
     <div className="lg:flex bg-white">
       {/* section sign in */}
@@ -86,16 +86,13 @@ function LoginFormComponent() {
             <form onSubmit={handleSubmit}>
               <div>
                 {/* alert */}
-                {pageState.error !== '' && (
+                {pageState.error !== "" && (
                   <div
                     className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-2"
                     role="alert"
                   >
                     <p className="font-bold">Maaf !</p>
-                    <p>
-                      {errorMessage(pageState.error)}
-                      .
-                    </p>
+                    <p>{errorMessage(pageState.error)}.</p>
                   </div>
                 )}
                 {/* tutup alert */}
@@ -108,7 +105,12 @@ function LoginFormComponent() {
                   type="text"
                   name="username"
                   placeholder="Masukkan Username"
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    setForm((old) => ({
+                      ...old,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
                 />
               </div>
               <div className="mt-8">
@@ -130,8 +132,12 @@ function LoginFormComponent() {
                   name="password"
                   type="password"
                   placeholder="Enter your password"
-                  // onChange={(event) => setForm("password", event.target.value)}
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    setForm((old) => ({
+                      ...old,
+                      [e.target.name]: e.target.value,
+                    }))
+                  }
                 />
               </div>
               <div className="mt-10">
@@ -149,8 +155,7 @@ function LoginFormComponent() {
             {/* ================TUTUP FORM================  */}
 
             <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-              Don't have an account ?
-              {' '}
+              <p>Dont have an account?</p>
               <a className="cursor-pointer text-indigo-600 hover:text-indigo-800">
                 Sign up
               </a>

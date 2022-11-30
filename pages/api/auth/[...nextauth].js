@@ -1,16 +1,15 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { db } from '../../../prisma/db';
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { db } from "../../../prisma/db";
 
 export const authOptions = {
   pages: {
-    signIn: '/api/auth/login',
+    signIn: "/api/auth/login",
   },
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
-
+      name: "credentials",
       async authorize(credentials, req) {
         // find user di db
         const tblUser = await db.user.findUnique({
@@ -29,6 +28,7 @@ export const authOptions = {
       },
     }),
   ],
+  secret: process.env.NEXT_PUBLIC_SECRET,
 };
 
 export default NextAuth(authOptions);

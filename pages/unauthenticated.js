@@ -1,7 +1,7 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React from "react";
+import { useRouter } from "next/router";
 
-export default function unauthenticated() {
+export default function UnAuthenticated() {
   const router = useRouter();
 
   return (
@@ -10,7 +10,7 @@ export default function unauthenticated() {
         <h3> Your are not authenticated...</h3>
         <button
           onClick={() => {
-            router.push('/auth/login');
+            router.push("/auth/login");
           }}
           className="bg-indigo-500 rounded-md p-2 text-white shadow-lg content-center"
         >

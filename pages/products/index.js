@@ -12,12 +12,11 @@ import {
   arrTab,
 } from "../../utils/DefaultArr";
 
-export default function index({ products, ss }) {
+export default function Index({ products }) {
   const [currentTab, setCurrentTab] = useState(arrTab[0]);
   const [arrFilter, setArrFilter] = useState([]);
   const [listActiveDrop, setListActiveDrop] = useState([]);
   const router = useRouter();
-  // console.log(ss);
 
   const handleTab = (item) => {
     setCurrentTab(item);
@@ -61,9 +60,10 @@ export default function index({ products, ss }) {
 }
 
 // membuat static html (saat build time)
-export const getServerSideProps = async (query) => {
+export const getServerSideProps = async (context) => {
   //jika ada parameter query
-  const params = query.query;
+
+  const params = Object.keys(context.query) ? context.query : "";
 
   if (Object.keys(params).length > 0) {
     const queryString = new URLSearchParams(params).toString();
@@ -107,6 +107,7 @@ export const getServerSideProps = async (query) => {
 
   //cek jika data belum ada di db lokal, lakukan penarikan
   if (Object.keys(dataLokal).length === 0) {
+    console.log("masuk");
     let allPromises = Promise.all(
       listKategori.map(async (request) => {
         return fetch(request)

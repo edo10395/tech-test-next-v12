@@ -22,15 +22,15 @@ export const arrKategori = [
   {
     id: 2,
     type: "productType",
-    kode: "bpjstk",
-    label: "Bpjstk",
+    kode: "bpjs_ketenagakerjaan",
+    label: "BPJS Ketenagakerjaan",
     activeMenu: false,
   },
   {
     id: 3,
     type: "productType",
-    kode: "bpjsks",
-    label: "Bpjsks",
+    kode: "bpjs_kesehatan",
+    label: "BPJS Kesehatan",
     activeMenu: false,
   },
   {
@@ -76,9 +76,16 @@ export const arrKategori = [
     activeMenu: false,
   },
   {
+    id: 9,
+    type: "productType",
+    kode: "qurban",
+    label: "Qurban",
+    activeMenu: false,
+  },
+  {
     id: 10,
     type: "productType",
-    kode: "multifinance",
+    kode: "multi",
     label: "Multifinance",
     activeMenu: false,
   },
@@ -88,14 +95,14 @@ export const arrOperator = [
   {
     id: 1,
     type: "operator",
-    kode: "mandiri_utama_finance",
-    label: "Mandiri Utama Finance",
+    kode: "xl",
+    label: "XL",
   },
   {
     id: 2,
     type: "operator",
-    kode: "FNFIF",
-    label: "FNFIF",
+    kode: "indosat",
+    label: "INDOSAT",
   },
 ];
 

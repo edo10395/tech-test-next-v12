@@ -21,7 +21,6 @@ function LoginFormComponent() {
   const handleChange = (e) => {
     setForm((old) => ({ ...old, [e.target.name]: e.target.value }));
   };
-  console.log(form);
 
   // handle pesan error
   const errorMessage = (error) => {
@@ -52,7 +51,7 @@ function LoginFormComponent() {
             error: res.error,
           }));
         }
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err);

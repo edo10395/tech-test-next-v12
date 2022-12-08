@@ -1,8 +1,6 @@
 import React from "react";
-import Dropdown from "./Dropdown";
 import Drops from "./Drops";
 import SearchInput from "./SearchInput";
-import Tables from "./Tables";
 
 export default function CardFilter({
   arrKategori,

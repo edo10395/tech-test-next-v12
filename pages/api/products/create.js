@@ -11,8 +11,9 @@ export default async function handler(req, res) {
 
   try {
     const datas = req.body;
-
+    const arr = [];
     datas.forEach(async (item, index) => {
+      arr.push(item);
       await db.dataProduk.create({
         data: datas[index],
       });
@@ -24,6 +25,7 @@ export default async function handler(req, res) {
     return res.status(201).json({
       success: true,
       message: "Berhasil ditambah",
+      query: arr,
     });
   } catch (error) {
     return res.status(401).json({

@@ -1,6 +1,10 @@
-import React from 'react';
-import LoginFormComponent from '../../components/LoginFormComponent';
+import React, { Fragment } from "react";
+import LoginFormComponent from "../../components/LoginFormComponent";
 
 export default function login() {
-  return <LoginFormComponent />;
+  return (
+    <Fragment>
+      <LoginFormComponent />
+    </Fragment>
+  );
 }

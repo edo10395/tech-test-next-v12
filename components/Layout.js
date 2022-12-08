@@ -1,7 +1,8 @@
-import Head from 'next/head';
-import React from 'react';
-import Header from './Header';
-import SideNavbar from './SideNavbar';
+import Head from "next/head";
+import Script from "next/script";
+import React from "react";
+import Header from "./Header";
+import SideNavbar from "./SideNavbar";
 
 export default function Layout(props) {
   return (

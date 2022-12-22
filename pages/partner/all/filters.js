@@ -28,20 +28,6 @@ export async function getServerSideProps(context) {
 
 export default function Filters({ products }) {
   const router = useRouter();
-  const { kategori, operator } = router.query;
-  console.log(products);
-
-  // useEffect(() => {
-  //   if (router.isReady) setLoading(true);
-  //   const { page, limit } = router.query;
-  //   setPage(page);
-  //   setLimit(limit);
-  //   setLoading(false);
-  // }, [router.isReady, router.query]);
-
-  // if (router.isReady) {
-  //   return <p>Loading...</p>;
-  // }
   return (
     <Layout>
       <CardProduct tabName="Semua Produk" params={router.query}>

@@ -10,19 +10,19 @@ export default function CardProduct(props) {
     setArrFilter({ ...arrFilter, [e.target.name]: e.target.value });
   };
 
+  const onSelectChange = (items) => {
+    const { kode, type, label } = items;
+    setArrFilter({ ...arrFilter, [type]: kode });
+    setListActiveDrop({ ...listActiveDrop, [type]: kode });
+  };
+
+  //jika ada filter params
   useEffect(() => {
     if (props.params) {
       setListActiveDrop(props.params);
       setArrFilter(props.params);
     }
   }, [props.params]);
-  console.log("arrfilter", arrFilter);
-
-  const onSelectChange = (items) => {
-    const { kode, type, label } = items;
-    setArrFilter({ ...arrFilter, [type]: kode });
-    setListActiveDrop({ ...listActiveDrop, [type]: kode });
-  };
 
   return (
     <div className="h-screen flex flex-row justify-start">

@@ -1,21 +1,25 @@
 import classNames from "classnames";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import company from "../public/assets/company.png";
+import { arrTab } from "../utils/DefaultArr";
 
-export default function CardHeader({ arrTab, handleTab, currentTab }) {
-  const getTabsClasses = (idTab) =>
+export default function CardHeader() {
+  const router = useRouter();
+
+  const getTabsClasses = (link) =>
     classNames(
       "inline-flex p-4 rounded-t-lg border-b-2 border-transparent  group",
       {
         "inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group":
-          currentTab.idTab === idTab,
+          router.pathname.includes(link),
       }
     );
-  const getIconClasses = (idTab) =>
+  const getIconClasses = (link) =>
     classNames("mr-2 w-5 h-5 text-gray-600 dark:text-gray-500", {
       "mr-2 w-5 h-5 text-blue-600 dark:text-blue-500":
-        currentTab.idTab === idTab,
+        router.pathname.includes(link),
     });
   return (
     <div className="max-w-full bg-white rounded-md mb-10">
@@ -32,17 +36,18 @@ export default function CardHeader({ arrTab, handleTab, currentTab }) {
         <p className="text-2xl">PARTNER 1</p>
       </div>
 
-      <div class="border-b border-gray-200 dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+      <div className="border-b border-gray-200 dark:border-gray-700">
+        <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
           {arrTab.map((item) => {
-            const classes = getTabsClasses(item.idTab);
-            const classesIcon = getIconClasses(item.idTab);
+            const classes = getTabsClasses(item.link);
+            const classesIcon = getIconClasses(item.link);
             return (
               <li className="mr-2" key={item.idTab}>
                 <button
                   className={classes}
                   aria-current="page"
-                  onClick={() => handleTab(item)}
+                  onClick={() => router.push(item.link)}
+                  // onClick={() => onChangeTab(item)}
                 >
                   <svg
                     aria-hidden="true"

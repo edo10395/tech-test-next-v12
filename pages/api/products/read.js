@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       OR: [
         {
           productType: {
-            contains: queryParam.productType,
+            contains: queryParam.kategori,
           },
           operator: {
             contains: queryParam.operator,
@@ -25,10 +25,13 @@ export default async function handler(req, res) {
       ],
     };
     const result = await db.dataProduk.findMany({
-      // skip: 1, // How many rows to skip
-      // take: 5, // Page size,
+      skip: 0, // How many rows to skip
+      take: 5, // Page size,
       where: {
         ...(Object.keys(queryParam).length > 0 ? filter : {}),
+      },
+      orderBy: {
+        id: "asc",
       },
     });
     // const str = queryParam.productType + "%";

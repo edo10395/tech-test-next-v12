@@ -25,7 +25,6 @@ export default function SideNavbar() {
   ];
 
   const router = useRouter();
-  // console.log(router);
 
   const activeMenu = useMemo(
     () => menuItems.find((menu) => menu.link === router.pathname),
@@ -50,7 +49,8 @@ export default function SideNavbar() {
     classNames(
       "flex items-center cursor-pointer rounded w-full overflow-hidden whitespace-nowrap",
       {
-        "bg-skin-default text-skin-light": activeMenu?.id === menu.id,
+        // "bg-skin-default text-skin-light": activeMenu?.id === menu.id,
+        "bg-blue-100 text-skin-light": activeMenu?.id === menu.id,
       }
     );
 
@@ -77,7 +77,7 @@ export default function SideNavbar() {
                 hidden: toggleCollapse,
               })}
             >
-              <Image src={logo} alt="logo" />
+              {/* <Image src={logo} alt="logo" /> */}
             </span>
           </div>
           {/* TUTUP LOGO */}

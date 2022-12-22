@@ -38,6 +38,7 @@ export default function Drops({ items, buttonName, onSelectChange }) {
               <Menu.Item key={item.id} onClick={() => onSelectChange(item)}>
                 {({ active }) => (
                   <p
+                    key={item.id}
                     className={`${
                       active && "bg-skin-default"
                     } w-full rounded-md p-2`}

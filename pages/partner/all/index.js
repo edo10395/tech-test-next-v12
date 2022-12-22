@@ -1,75 +1,40 @@
-import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import CardFilter from "../../../components/CardFilter";
+import CardProduct from "../../../components/CardProduct";
 import Layout from "../../../components/Layout";
 import TableProduct from "../../../components/TableProduct";
-import {
-  arrKategori,
-  arrOperator,
-  arrStatus,
-  arrTab,
-} from "../../../utils/DefaultArr";
 
-const Products = ({ products }) => {
+// export default function Index({ products }) {
+const Index = ({ products }) => {
   const { success, query } = products;
   const [dataProduct, setProducts] = useState([]);
-  const [currentTab, setCurrentTab] = useState(arrTab[0]);
 
   useEffect(() => {
     if (success) {
       setProducts(query);
     }
   }, []);
-  const handleTab = (item) => {
-    setCurrentTab(item);
-  };
-  const handleSearch = (e) => {
-    setArrFilter({ ...arrFilter, [e.target.name]: e.target.value });
-  };
-
-  const onSelectChange = (items) => {
-    const { kode, type, label } = items;
-    setArrFilter({ ...arrFilter, [type]: kode });
-    setListActiveDrop({ ...listActiveDrop, [type]: label });
-  };
 
   return (
     <Layout title="Product">
-      <TableProduct
-        arrTab={arrTab}
-        handleTab={handleTab}
-        currentTab={currentTab}
-        products={dataProduct}
-      />
+      <CardProduct tabName="Semua Produk">
+        <TableProduct data={dataProduct} />
+      </CardProduct>
     </Layout>
   );
 };
-export default Products;
+export default Index;
 
 export const addData = async () => {
-  const listKategori = [
-    // `${process.env.NEXT_API_URL}/mobile`,
-    `${process.env.NEXT_API_URL}/bpjstk`,
-    // `${process.env.NEXT_API_URL}/bpjsks`,
-    // `${process.env.NEXT_API_URL}/ewallet`,
-    // `${process.env.NEXT_API_URL}/telkom-postpaid`,
-    // `${process.env.NEXT_API_URL}/zakat`,
-    // `${process.env.NEXT_API_URL}/infaq`,
-    // `${process.env.NEXT_API_URL}/wakaf`,
-    // `${process.env.NEXT_API_URL}/qurban`,
-    // `${process.env.NEXT_API_URL}/multifinance`,
-  ];
-  let allPromises = Promise.all(
-    listKategori.map(async (request) => {
-      return fetch(request)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          return data.data;
-        });
+  let res = await fetch(`${process.env.NEXT_API_URL}`)
+    .then((response) => {
+      return response.json();
     })
-  );
-  let results = await allPromises;
-  const extProducts = results.flat();
+    .then((data) => {
+      return data.data;
+    });
+  const extProducts = res.flat();
   const response = await axios
     .post(`${process.env.NEXT_SERVER_API_URL}/create`, extProducts)
     .then((data) => {
@@ -82,17 +47,36 @@ export const addData = async () => {
   return response;
 };
 
-Products.getInitialProps = async () => {
+export const getStaticProps = async () => {
   const response = await fetch(`${process.env.NEXT_SERVER_API_URL}/read`);
   const data = await response.json();
 
   if (data.success && Object.keys(data.query).length < 1) {
     const data = await addData();
     return {
-      products: data,
+      props: {
+        products: data,
+      },
     };
   }
   return {
-    products: data,
+    props: {
+      products: data,
+    },
   };
 };
+// Index.getInitialProps = async (context) => {
+//   console.log("ctx", context);
+//   const response = await fetch(`${process.env.NEXT_SERVER_API_URL}/read`);
+//   const data = await response.json();
+
+//   if (data.success && Object.keys(data.query).length < 1) {
+//     const data = await addData();
+//     return {
+//       products: data,
+//     };
+//   }
+//   return {
+//     products: data,
+//   };
+// };

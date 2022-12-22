@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardFilter from "./CardFilter";
 import CardHeader from "./CardHeader";
 
@@ -9,12 +9,20 @@ export default function CardProduct(props) {
   const handleSearch = (e) => {
     setArrFilter({ ...arrFilter, [e.target.name]: e.target.value });
   };
-  console.log(arrFilter);
+
+  useEffect(() => {
+    if (props.params) {
+      setListActiveDrop(props.params);
+      // setListActiveDrop({ ...listActiveDrop, [type]: label });
+    }
+  }, [props.params]);
+  console.log(listActiveDrop);
+  console.log("params", props.params);
 
   const onSelectChange = (items) => {
     const { kode, type, label } = items;
     setArrFilter({ ...arrFilter, [type]: kode });
-    setListActiveDrop({ ...listActiveDrop, [type]: label });
+    setListActiveDrop({ ...listActiveDrop, [type]: kode });
   };
 
   return (

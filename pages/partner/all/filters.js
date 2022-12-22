@@ -44,7 +44,7 @@ export default function Filters({ products }) {
   // }
   return (
     <Layout>
-      <CardProduct tabName="Semua Produk">
+      <CardProduct tabName="Semua Produk" params={router.query}>
         <TableProduct data={products} />
       </CardProduct>
     </Layout>

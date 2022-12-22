@@ -10,6 +10,12 @@ export default function CardFilter({
   listActiveDrop,
   arrFilter,
 }) {
+  const getItemName = (arr, kode) => {
+    const obj = arr.find((item) => item.kode === kode);
+    return obj.label;
+  };
+  // console.log(getItemName(arrKategori, "mobile"));
+
   return (
     <div className="bg-white flex flex-col rounded-md p-4 gap-5">
       <div className="mb-5">
@@ -24,7 +30,7 @@ export default function CardFilter({
               items={arrKategori}
               buttonName={
                 listActiveDrop && listActiveDrop.kategori
-                  ? listActiveDrop.kategori
+                  ? getItemName(arrKategori, listActiveDrop.kategori)
                   : "Semua Kategori"
               }
               onSelectChange={onSelectChange}
@@ -39,7 +45,7 @@ export default function CardFilter({
               items={arrOperator}
               buttonName={
                 listActiveDrop && listActiveDrop.operator
-                  ? listActiveDrop.operator
+                  ? getItemName(arrOperator, listActiveDrop.operator)
                   : "Semua Operator"
               }
               onSelectChange={onSelectChange}
@@ -54,7 +60,7 @@ export default function CardFilter({
               items={arrStatus}
               buttonName={
                 listActiveDrop && listActiveDrop.status
-                  ? listActiveDrop.status
+                  ? getItemName(arrStatus, listActiveDrop.status)
                   : "Tidak Aktif"
               }
               onSelectChange={onSelectChange}

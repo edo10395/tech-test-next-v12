@@ -13,11 +13,10 @@ export default function CardProduct(props) {
   useEffect(() => {
     if (props.params) {
       setListActiveDrop(props.params);
-      // setListActiveDrop({ ...listActiveDrop, [type]: label });
+      setArrFilter(props.params);
     }
   }, [props.params]);
-  console.log(listActiveDrop);
-  console.log("params", props.params);
+  console.log("arrfilter", arrFilter);
 
   const onSelectChange = (items) => {
     const { kode, type, label } = items;

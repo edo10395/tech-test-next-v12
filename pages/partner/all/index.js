@@ -1,6 +1,4 @@
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import CardFilter from "../../../components/CardFilter";
 import CardProduct from "../../../components/CardProduct";
 import Layout from "../../../components/Layout";
 import TableProduct from "../../../components/TableProduct";

@@ -25,8 +25,8 @@ export default async function handler(req, res) {
       ],
     };
     const result = await db.dataProduk.findMany({
-      skip: 0, // How many rows to skip
-      take: 5, // Page size,
+      // skip: 0, // How many rows to skip
+      // take: 10, // Page size,
       where: {
         ...(Object.keys(queryParam).length > 0 ? filter : {}),
       },

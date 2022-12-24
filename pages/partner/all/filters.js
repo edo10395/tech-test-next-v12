@@ -7,10 +7,11 @@ import TableProduct from "../../../components/TableProduct";
 
 export async function getServerSideProps(context) {
   const { query } = context;
+  const queryString = new URLSearchParams(query).toString();
 
   if (Object.keys(query).length > 0) {
     const response = await fetch(
-      `${process.env.NEXT_SERVER_API_URL}/read?kategori=${query.kategori}&operator=${query.operator}`
+      `${process.env.NEXT_SERVER_API_URL}/read?${queryString}`
     );
     const data = await response.json();
     return {
